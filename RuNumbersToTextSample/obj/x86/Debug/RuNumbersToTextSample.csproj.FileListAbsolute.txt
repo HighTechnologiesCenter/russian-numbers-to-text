@@ -1,5 +1,0 @@
-D:\MyDocs\Experiments\RuNumbersToTextSample\RuNumbersToTextSample\bin\Debug\RuNumbersToTextSample.exe
-D:\MyDocs\Experiments\RuNumbersToTextSample\RuNumbersToTextSample\bin\Debug\RuNumbersToTextSample.pdb
-D:\MyDocs\Experiments\RuNumbersToTextSample\RuNumbersToTextSample\obj\x86\Debug\ResolveAssemblyReference.cache
-D:\MyDocs\Experiments\RuNumbersToTextSample\RuNumbersToTextSample\obj\x86\Debug\RuNumbersToTextSample.exe
-D:\MyDocs\Experiments\RuNumbersToTextSample\RuNumbersToTextSample\obj\x86\Debug\RuNumbersToTextSample.pdb

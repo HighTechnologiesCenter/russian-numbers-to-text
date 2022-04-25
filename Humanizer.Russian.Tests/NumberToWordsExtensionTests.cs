@@ -38,7 +38,7 @@ namespace Humanizer.Russian.Tests
         [Theory]
         public void ToWordsMasculine(int number, string expected)
         {
-            Assert.Equal(expected, number.ToWords(Gender.Musculine));
+            Assert.Equal(expected, number.ToWords(Gender.Masculine));
         }
 
         [InlineData(1, "одна")]
@@ -117,7 +117,7 @@ namespace Humanizer.Russian.Tests
         [Theory]
         public void ToWordsMusculineWithTitle(int number, string[] titles, string expected)
         {
-            Assert.Equal(expected, number.ToWords(Gender.Musculine, titles));
+            Assert.Equal(expected, number.ToWords(Gender.Masculine, titles));
         }
 
 
@@ -147,7 +147,7 @@ namespace Humanizer.Russian.Tests
         {
             2.ToWords(Gender.Feminine);
 
-            var exception = Assert.Throws<ArgumentOutOfRangeException>(() => 2.ToWords(Gender.Musculine, new[] { "яблоко" }));
+            var exception = Assert.Throws<ArgumentOutOfRangeException>(() => 2.ToWords(Gender.Masculine, new[] { "яблоко" }));
             Assert.Equal("titles", exception.ParamName);
         }
     }

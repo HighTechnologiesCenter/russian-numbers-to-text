@@ -48,7 +48,7 @@ namespace Humanizer.Russian
                 if (tmpValue < powers[i]) continue;
                 if (result.Length > 0)
                     result.Append(" ");
-                result.Append(NumberLessThanThousandToWord(tmpValue / powers[i], i == 0 ? Gender.Feminine : Gender.Musculine, powerTitles[i]));
+                result.Append(NumberLessThanThousandToWord(tmpValue / powers[i], i == 0 ? Gender.Feminine : Gender.Masculine, powerTitles[i]));
                 tmpValue %= powers[i];
             }
 
@@ -101,7 +101,7 @@ namespace Humanizer.Russian
                         case Gender.Neuter:
                             result.Append("одно");
                             break;
-                        case Gender.Musculine:
+                        case Gender.Masculine:
                             result.Append("один");
                             break;
                         case Gender.Feminine:
@@ -116,7 +116,7 @@ namespace Humanizer.Russian
                     switch (gender)
                     {
                         case Gender.Neuter:
-                        case Gender.Musculine:
+                        case Gender.Masculine:
                             result.Append("два");
                             break;
                         case Gender.Feminine:

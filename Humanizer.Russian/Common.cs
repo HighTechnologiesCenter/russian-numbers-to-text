@@ -13,7 +13,7 @@
         /// <summary>
         /// Мужской
         /// </summary>
-        Musculine = 1,
+        Masculine = 1,
 
         /// <summary>
         /// Женский

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace Humanizer.Russian
+﻿namespace Humanizer.Russian
 {
     /// <summary>
     /// Род
@@ -14,10 +9,12 @@ namespace Humanizer.Russian
         /// Средний
         /// </summary>
         Neuter = 0,
+
         /// <summary>
         /// Мужской
         /// </summary>
-        Musculine = 1,
+        Masculine = 1,
+
         /// <summary>
         /// Женский
         /// </summary>

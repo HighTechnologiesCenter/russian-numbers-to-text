@@ -11,33 +11,20 @@ namespace Humanizer.Russian
         /// <summary>
         /// Число прописью
         /// </summary>
-        /// <param name="gender">Род</param>
-        /// <exception cref="ArgumentOutOfRangeException"></exception>
-        /// <example>
-        ///     2.ToWords(Gender.Musculine) // два
-        /// </example>
-        public static string ToWords(this int number, Gender gender)
-        {
-            return ToWords(number, gender, null);
-        }
-
-        /// <summary>
-        /// Число прописью
-        /// </summary>
+        /// <param name="number"> Число </param>
         /// <param name="gender">Род</param>
         /// <param name="titles">Три формы измерения. [один] "кит", [два] "кита", [пять] "китов" </param>
-        /// <param name="ignoreZero"></param>
         /// <exception cref="ArgumentOutOfRangeException"></exception>
         /// <example>
         ///     2.ToWords(Gender.Musculine, new[] { "яблоко", "яблока", "яблок" }) // два яблока
         /// </example>
-        public static string ToWords(this int number, Gender gender, string[] titles, Boolean ignoreZero = true)
+        public static string ToWords(this int number, Gender gender, string[] titles = null)
         {
             if (titles != null && titles.Length != 3)
             {
                 throw new ArgumentOutOfRangeException("titles", "Массив должен содержать три формы");
             }
-            var powers = new[] { 
+            var powers = new[] {
                 1000L, // 10^3
                 1000 * 1000L, // 10^6
                 1000 * 1000 * 1000L, // 10^9
@@ -45,7 +32,7 @@ namespace Humanizer.Russian
                 1000 * 1000 * 1000 * 1000L * 1000L, // 10^15
             };
             var powerTitles = new[]
-            { 
+            {
                 new[] { "тысяча", "тысячи", "тысяч" },
                 new[] { "миллион", "миллиона", "миллионов" },
                 new[] { "миллиард", "миллиарда", "миллиардов" },
@@ -58,13 +45,11 @@ namespace Humanizer.Russian
 
             for (var i = powers.Length - 1; i >= 0; i--)
             {
-                if (tmpValue >= powers[i])
-                {
-                    if (result.Length > 0)
-                        result.Append(" ");
-                    result.Append(NumberLessThanThousandToWord(tmpValue / powers[i], i == 0 ? Gender.Feminine : Gender.Musculine, powerTitles[i]));
-                    tmpValue %= powers[i];
-                }
+                if (tmpValue < powers[i]) continue;
+                if (result.Length > 0)
+                    result.Append(" ");
+                result.Append(NumberLessThanThousandToWord(tmpValue / powers[i], i == 0 ? Gender.Feminine : Gender.Masculine, powerTitles[i]));
+                tmpValue %= powers[i];
             }
 
             if (result.Length > 0)
@@ -74,16 +59,16 @@ namespace Humanizer.Russian
             return result.ToString().Trim();
         }
 
-        private static string NumberLessThanThousandToWord(Int64 number, Gender gender, string[] titles, Boolean ignoreZero = true)
+        private static string NumberLessThanThousandToWord(long number, Gender gender, string[] titles, bool ignoreZero = true)
         {
             var result = new StringBuilder();
-            Int32 titleIndex;
+            int titleIndex;
 
             if (number > 99)
             {
-                var hundreds = new String[] { "", "сто", "двести", "триста", "четыреста", "пятьсот", "шестьсот", "семьсот", "восемьсот", "девятьсот" };
+                var hundreds = new[] { "", "сто", "двести", "триста", "четыреста", "пятьсот", "шестьсот", "семьсот", "восемьсот", "девятьсот" };
                 result.Append(hundreds[number / 100]);
-                number = number % 100;
+                number %= 100;
             }
 
             if (number > 19)
@@ -92,7 +77,7 @@ namespace Humanizer.Russian
                 if (result.Length > 0)
                     result.Append(" ");
                 result.Append(tens[number / 10]);
-                number = number % 10;
+                number %= 10;
             }
 
             if (number == 0)
@@ -116,7 +101,7 @@ namespace Humanizer.Russian
                         case Gender.Neuter:
                             result.Append("одно");
                             break;
-                        case Gender.Musculine:
+                        case Gender.Masculine:
                             result.Append("один");
                             break;
                         case Gender.Feminine:
@@ -131,7 +116,7 @@ namespace Humanizer.Russian
                     switch (gender)
                     {
                         case Gender.Neuter:
-                        case Gender.Musculine:
+                        case Gender.Masculine:
                             result.Append("два");
                             break;
                         case Gender.Feminine:
@@ -143,9 +128,11 @@ namespace Humanizer.Russian
                 }
                 else
                 {
-                    var numbers = new[] { 
-                "0", "1", "2", "три", "четыре", "пять", "шесть", "семь", "восемь", "девять", 
-                "десять", "одиннадцать", "двенадцать", "тринадцать", "четырнадцать", "пятнадцать", "шестнадцать", "семнадцать", "восемнадцать", "девятнадцать" };
+                    var numbers = new[] {
+                                "0", "1", "2", "три", "четыре", "пять", "шесть", "семь", "восемь", "девять",
+                                "десять", "одиннадцать", "двенадцать", "тринадцать", "четырнадцать", "пятнадцать",
+                                "шестнадцать", "семнадцать", "восемнадцать", "девятнадцать"
+                                };
                     result.Append(numbers[number]);
                 }
             }

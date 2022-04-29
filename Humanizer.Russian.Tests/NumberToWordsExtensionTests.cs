@@ -1,6 +1,5 @@
 ﻿using System;
 using Xunit;
-using Xunit.Extensions;
 
 namespace Humanizer.Russian.Tests
 {
@@ -37,9 +36,9 @@ namespace Humanizer.Russian.Tests
         [InlineData(1234567890, "один миллиард двести тридцать четыре миллиона пятьсот шестьдесят семь тысяч восемьсот девяносто")]
         [InlineData(0, "ноль")]
         [Theory]
-        public void ToWordsMusculine(int number, string expected)
+        public void ToWordsMasculine(int number, string expected)
         {
-            Assert.Equal(expected, number.ToWords(Gender.Musculine));
+            Assert.Equal(expected, number.ToWords(Gender.Masculine));
         }
 
         [InlineData(1, "одна")]
@@ -118,7 +117,7 @@ namespace Humanizer.Russian.Tests
         [Theory]
         public void ToWordsMusculineWithTitle(int number, string[] titles, string expected)
         {
-            Assert.Equal(expected, number.ToWords(Gender.Musculine, titles));
+            Assert.Equal(expected, number.ToWords(Gender.Masculine, titles));
         }
 
 
@@ -148,8 +147,8 @@ namespace Humanizer.Russian.Tests
         {
             2.ToWords(Gender.Feminine);
 
-            var exception = Assert.Throws<ArgumentOutOfRangeException>(() => 2.ToWords(Gender.Musculine, new[] { "яблоко" }));
-            Assert.Equal(exception.ParamName, "titles");
+            var exception = Assert.Throws<ArgumentOutOfRangeException>(() => 2.ToWords(Gender.Masculine, new[] { "яблоко" }));
+            Assert.Equal("titles", exception.ParamName);
         }
     }
 }

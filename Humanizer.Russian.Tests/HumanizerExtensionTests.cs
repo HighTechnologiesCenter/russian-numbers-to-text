@@ -4,7 +4,7 @@ using Xunit;
 
 namespace Humanizer.Russian.Tests;
 
-public class NumberToWordsExtensionTests
+public class HumanizerExtensionTests
 {
     private static readonly HumanizerOptions MasculineOptions = new()
     {
